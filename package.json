@@ -1,5 +1,5 @@
 {
-  "name": "banditdb-ucb",
+  "name": "ucb",
   "description": "A Promises/A+, upper confidence bounds multi-armed bandit",
   "version": "0.1.0",
   "author": "kurttheviking",
