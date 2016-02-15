@@ -1,34 +1,51 @@
 {
   "name": "ucb",
-  "description": "A Promises/A+ upper confidence bounds multi-armed bandit",
+  "description": "An upper confidence bounds multi-armed bandit algorithm",
   "version": "0.2.1",
-  "author": "banditdb",
-  "contributors": [
-    "kurttheviking"
-  ],
+  "license": "ISC",
+  "main": "index.js",
   "keywords": [
     "multi-armed bandit",
     "upper confidence bounds algorithm",
-    "ucb algorithm",
-    "promise",
-    "promises-a",
-    "promises-aplus"
+    "promises-aplus",
+    "banditlab"
   ],
-  "main": "index.js",
-  "scripts": {
-    "test": "node node_modules/mocha/bin/mocha ./test/index"
+  "author": {
+    "name": "Kurt Ericson",
+    "email": "github@kurttheviking.com",
+    "url": "http://github.com/kurttheviking"
   },
-  "repository": "git@github.com:banditdb/ucb.git",
+  "contributors": [
+    {
+      "name": "Kurt Ericson",
+      "email": "github@kurttheviking.com",
+      "url": "https://github.com/kurttheviking"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kurttheviking/ucb.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kurttheviking/ucb/issues"
+  },
+  "homepage": "https://github.com/kurttheviking/ucb#readme",
   "dependencies": {
-    "bluebird": "2.9.13",
-    "lodash": "3.5.0"
+    "bluebird": "3.3.0",
+    "debug": "2.2.0",
+    "lodash": "4.3.0"
   },
   "devDependencies": {
-    "chai": "2.1.1",
-    "mocha": "2.2.1",
-    "sinon": "1.13.0",
-    "sinon-chai": "2.7.0"
+    "chai": "3.5.0",
+    "eslint": "1.10.3",
+    "eslint-config-airbnb": "5.0.0",
+    "mocha-eslint": "1.0.0",
+    "istanbul": "0.4.2",
+    "mocha": "2.4.5",
+    "sinon": "1.17.3"
   },
-  "readmeFilename": "README.md",
-  "license": "ISC"
+  "scripts": {
+    "coverage": "./node_modules/istanbul/lib/cli.js cover --report=json-summary --report=html _mocha ./test -- --recursive",
+    "test": "node node_modules/mocha/bin/mocha ./test --recursive"
+  }
 }
