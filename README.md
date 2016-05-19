@@ -129,7 +129,7 @@ A promise that resolves to an updated instance of the algorithm.
 **Example**
 
 ```js
-var Algorithm = require('egreedy');
+var Algorithm = require('ucb');
 var algorithm = new Algorithm();
 
 algorithm.reward(0, 1).then(function (algorithmUpdated) { console.log(algorithmUpdated) });
