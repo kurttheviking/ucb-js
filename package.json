@@ -24,12 +24,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/kurttheviking/ucb.git"
+    "url": "git://github.com/kurttheviking/ucb-js.git"
   },
   "bugs": {
-    "url": "https://github.com/kurttheviking/ucb/issues"
+    "url": "https://github.com/kurttheviking/ucb-js/issues"
   },
-  "homepage": "https://github.com/kurttheviking/ucb#readme",
+  "homepage": "https://github.com/kurttheviking/ucb-js#readme",
   "dependencies": {
     "bluebird": "3.3.5",
     "debug": "2.2.0",

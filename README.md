@@ -1,7 +1,7 @@
 ucb
 =======
 
-[![Build Status](https://travis-ci.org/kurttheviking/ucb.svg)](https://travis-ci.org/kurttheviking/ucb)
+[![Build Status](https://travis-ci.org/kurttheviking/ucb-js.svg)](https://travis-ci.org/kurttheviking/ucb-js)
 
 **An upper confidence bounds algorithm for multi-armed bandit problems**
 
@@ -63,7 +63,7 @@ The `config` object supports two parameters:
 
 - `arms`: (Number:Integer, Optional), default=2, the number of arms over which the optimization will operate
 
-Alternatively, the `state` object returned from [`Algorithm#serialize`](https://github.com/kurttheviking/ucb#algorithmserialize) can be passed as `config`.
+Alternatively, the `state` object returned from [`Algorithm#serialize`](https://github.com/kurttheviking/ucb-js#algorithmserialize) can be passed as `config`.
 
 
 **Returns**
@@ -190,7 +190,7 @@ npm run coverage
 
 ## Contribute
 
-PRs are welcome! For bugs, please include a failing test which passes when your PR is applied. [Travis CI](https://travis-ci.org/kurttheviking/ucb) provides on-demand testing for commits and pull requests.
+PRs are welcome! For bugs, please include a failing test which passes when your PR is applied. [Travis CI](https://travis-ci.org/kurttheviking/ucb-js) provides on-demand testing for commits and pull requests.
 
 
 ## Caveat emptor
