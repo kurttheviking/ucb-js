@@ -5,8 +5,8 @@ var chai = require('chai');
 
 var expect = chai.expect;
 
-describe('#reward(arm, reward)', function () {
-  var Algorithm = require('../../index');
+describe('Algorithm#reward', function () {
+  var Algorithm = require('../../../index');  // eslint-disable-line global-require
   var arms = _.random(1, 10);
   var config = {
     arms: arms
@@ -26,13 +26,22 @@ describe('#reward(arm, reward)', function () {
     });
   });
 
-  it('resolves to the total count of observed rounds', function () {
+  it('resolves to the updated algorithm instance', function () {
     var arm = _.random(0, arms - 1);
-    var alg = new Algorithm(config);
     var val = _.random(0, 1, true);
 
-    alg.reward(arm, val).then(function (out) {
-      expect(out).to.equal(1);
+    var alg = new Algorithm(config);
+    var sumPre = _.sum(alg.counts);
+
+    alg.reward(arm, val).then(function (updatedAlg) {
+      var sumPost = _.sum(alg.counts);
+
+      expect(updatedAlg).to.be.an.instanceof(Algorithm);
+      expect(sumPost).to.equal(sumPre + 1);
+
+      expect(updatedAlg.select).to.be.a('function');
+      expect(updatedAlg.reward).to.be.a('function');
+      expect(updatedAlg.serialize).to.be.a('function');
     });
   });
 

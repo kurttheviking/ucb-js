@@ -6,8 +6,8 @@ var chai = require('chai');
 
 var expect = chai.expect;
 
-describe('#select', function () {
-  var Algorithm = require('../../index');
+describe('Algorithm#select', function () {
+  var Algorithm = require('../../../index');  // eslint-disable-line global-require
   var arms = _.random(1, 10);
   var config = {
     arms: arms
