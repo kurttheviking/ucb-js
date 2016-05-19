@@ -8,7 +8,7 @@
     "multi-armed bandit",
     "upper confidence bounds algorithm",
     "promises-aplus",
-    "banditlab"
+    "banditlab/2.0"
   ],
   "author": {
     "name": "Kurt Ericson",
