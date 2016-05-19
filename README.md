@@ -23,14 +23,13 @@ npm install ucb --save
 
 Then, use the algorithm:
 
-1. Create an optimizer with `3` arms and epsilon `0.25`:
+1. Create an optimizer with `3` arms:
 
     ```js
     var Algorithm = require('ucb');
 
     var algorithm = new Algorithm({
-      arms: 3,
-      epsilon: 0.25
+      arms: 3
     });
     ```
 
