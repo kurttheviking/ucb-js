@@ -1,7 +1,7 @@
 ucb
 =======
 
-[![Build Status](https://travis-ci.org/kurttheviking/ucb-js.svg)](https://travis-ci.org/kurttheviking/ucb-js)
+[![Build Status](https://travis-ci.org/kurttheviking/ucb-js.svg?branch=master)](https://travis-ci.org/kurttheviking/ucb-js)
 
 **An upper confidence bounds algorithm for multi-armed bandit problems**
 
