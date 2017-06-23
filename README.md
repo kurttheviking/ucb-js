@@ -26,9 +26,9 @@ Then, use the algorithm:
 1. Create an optimizer with `3` arms:
 
     ```js
-    var Algorithm = require('ucb');
+    const Algorithm = require('ucb');
 
-    var algorithm = new Algorithm({
+    const algorithm = new Algorithm({
       arms: 3
     });
     ```
@@ -72,8 +72,8 @@ An instance of the ucb optimization algorithm.
 **Example**
 
 ```js
-var Algorithm = require('ucb');
-var algorithm = new Algorithm();
+const Algorithm = require('ucb');
+const algorithm = new Algorithm();
 
 assert.equal(algorithm.arms, 2);
 ```
@@ -81,8 +81,8 @@ assert.equal(algorithm.arms, 2);
 Or, with a passed `config`:
 
 ```js
-var Algorithm = require('ucb');
-var algorithm = new Algorithm({arms: 4});
+const Algorithm = require('ucb');
+const algorithm = new Algorithm({arms: 4});
 
 assert.equal(algorithm.arms, 4);
 ```
@@ -102,8 +102,8 @@ A promise that resolves to a Number corresponding to the associated arm index.
 **Example**
 
 ```js
-var Algorithm = require('ucb');
-var algorithm = new Algorithm();
+const Algorithm = require('ucb');
+const algorithm = new Algorithm();
 
 algorithm.select().then(function (arm) { console.log(arm); });
 ```
@@ -128,8 +128,8 @@ A promise that resolves to an updated instance of the algorithm.
 **Example**
 
 ```js
-var Algorithm = require('ucb');
-var algorithm = new Algorithm();
+const Algorithm = require('ucb');
+const algorithm = new Algorithm();
 
 algorithm.reward(0, 1).then(function (algorithmUpdated) { console.log(algorithmUpdated) });
 ```
@@ -157,8 +157,8 @@ A promise that resolves to an Object representing parameters required to reconst
 **Example**
 
 ```js
-var Algorithm = require('ucb');
-var algorithm = new Algorithm();
+const Algorithm = require('ucb');
+const algorithm = new Algorithm();
 
 algorithm.serialize().then(function (state) { console.log(state); });
 ```
@@ -176,7 +176,7 @@ algorithm.serialize().then(function (state) { console.log(state); });
 
 To run the unit test suite:
 
-```
+```sh
 npm test
 ```
 
@@ -195,5 +195,3 @@ PRs are welcome! For bugs, please include a failing test which passes when your 
 ## Caveat emptor
 
 This implementation often encounter extended floating point numbers. Arm selection is therefore subject to JavaScript's floating point precision limitations. For general information about floating point issues see the [floating point guide](http://floating-point-gui.de).
-
-While these factors generally do not impede common application, I would consider the implementation suspect in an academic setting.
