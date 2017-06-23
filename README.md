@@ -144,7 +144,7 @@ _None_
 
 A `Promise` that resolves to a stringify-able `Object` with parameters needed to reconstruct algorithm state.
 
-#### Example**
+#### Example
 
 ```js
 const Algorithm = require('ucb');
