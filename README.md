@@ -5,23 +5,26 @@ ucb
 
 **An upper confidence bounds algorithm for multi-armed bandit problems**
 
-This implementation is based on [<em>Bandit Algorithms for Website Optimization</em>](http://shop.oreilly.com/product/0636920027393.do) and related empirical research in ["Algorithms for the multi-armed bandit problem"](http://www.cs.mcgill.ca/~vkules/bandits.pdf).
+This implementation is based on [<em>Bandit Algorithms for Website Optimization</em>](http://shop.oreilly.com/product/0636920027393.do) and related empirical research in ["Algorithms for the multi-armed bandit problem"](http://www.cs.mcgill.ca/~vkules/bandits.pdf). In addition, this module conforms to the [BanditLab/2.0 specification](https://github.com/kurttheviking/banditlab-spec/releases).
 
 
-## Specification
+## Get started
 
-This module conforms to the [BanditLab/2.0 specification](https://github.com/kurttheviking/banditlab-spec/releases).
+### Prerequisites
 
+- Node.js 4.x+ ([LTS track](https://github.com/nodejs/LTS#lts-schedule1))
+- npm
 
-## Quick start
+### Installing
 
-First, install this module in your project:
+Install with `npm` (or `yarn`):
 
 ```sh
 npm install ucb --save
 ```
 
-Then, use the algorithm:
+
+## Usage
 
 1. Create an optimizer with `3` arms:
 
@@ -33,7 +36,7 @@ Then, use the algorithm:
     });
     ```
 
-2. Select an arm (for exploration or exploitation, according to the algorithm):
+2. Select an arm (exploits or explores, determined by the algorithm):
 
     ```js
     algorithm.select().then(function (arm) {
@@ -50,11 +53,11 @@ Then, use the algorithm:
 
 ## API
 
-#### `Algorithm(config)`
+### `Algorithm(config)`
 
 Creates a new optimization algorithm.
 
-**Arguments**
+#### Arguments
 
 - `config` (Object): algorithm instance parameters
 
@@ -64,12 +67,11 @@ The `config` object supports two parameters:
 
 Alternatively, the `state` object returned from [`Algorithm#serialize`](https://github.com/kurttheviking/ucb-js#algorithmserialize) can be passed as `config`.
 
-
-**Returns**
+#### Returns
 
 An instance of the ucb optimization algorithm.
 
-**Example**
+#### Example
 
 ```js
 const Algorithm = require('ucb');
@@ -82,97 +84,79 @@ Or, with a passed `config`:
 
 ```js
 const Algorithm = require('ucb');
-const algorithm = new Algorithm({arms: 4});
+const algorithm = new Algorithm({ arms: 4 });
 
 assert.equal(algorithm.arms, 4);
 ```
 
-#### `Algorithm#select()`
+### `Algorithm#select()`
 
-Choose an arm to play, according to the specified bandit algorithm.
+Choose an arm to play, according to the optimization algorithm.
 
-**Arguments**
+#### Arguments
 
 _None_
 
-**Returns**
+#### Returns
 
-A promise that resolves to a Number corresponding to the associated arm index.
+A `Promise` that resolves to a `Number` corresponding to the associated arm index.
 
-**Example**
+#### Example
 
 ```js
 const Algorithm = require('ucb');
 const algorithm = new Algorithm();
 
-algorithm.select().then(function (arm) { console.log(arm); });
+algorithm.select().then(arm => console.log(arm));
 ```
 
-```js
-0
-```
-
-#### `Algorithm#reward(arm, reward)`
+### `Algorithm#reward(arm, reward)`
 
 Inform the algorithm about the payoff from a given arm.
 
-**Arguments**
+#### Arguments
 
 - `arm` (Integer): the arm index (provided from `algorithm.select()`)
 - `reward` (Number): the observed reward value (which can be 0, to indicate no reward)
 
-**Returns**
+#### Returns
 
-A promise that resolves to an updated instance of the algorithm.
+A `Promise` that resolves to an updated instance of the algorithm. (The original instance is mutated as well.)
 
-**Example**
+#### Example
 
 ```js
 const Algorithm = require('ucb');
 const algorithm = new Algorithm();
 
-algorithm.reward(0, 1).then(function (algorithmUpdated) { console.log(algorithmUpdated) });
+algorithm.reward(0, 1).then(updatedAlgorithm => console.log(updatedAlgorithm));
 ```
 
-```js
-<Algorithm>{
-  arms: 2,
-  counts: [ 1, 0 ],
-  values: [ 1, 0 ]
-}
-```
-
-#### `Algorithm#serialize()`
+### `Algorithm#serialize()`
 
 Obtain a plain object representing the internal state of the algorithm.
 
-**Arguments**
+#### Arguments
 
 _None_
 
-**Returns**
+#### Returns
 
-A promise that resolves to an Object representing parameters required to reconstruct algorithm state.
+A `Promise` that resolves to a stringify-able `Object` with parameters needed to reconstruct algorithm state.
 
-**Example**
+#### Example**
 
 ```js
 const Algorithm = require('ucb');
 const algorithm = new Algorithm();
 
-algorithm.serialize().then(function (state) { console.log(state); });
-```
-
-```js
-{
-  arms: 2,
-  counts: [0, 0],
-  values: [0, 0]
-}
+algorithm.serialize().then(state => console.log(state));
 ```
 
 
-## Tests
+## Development
+
+### Tests
 
 To run the unit test suite:
 
@@ -186,8 +170,7 @@ Or, to run the test suite and view test coverage:
 npm run coverage
 ```
 
-
-## Contribute
+### Contribute
 
 PRs are welcome! For bugs, please include a failing test which passes when your PR is applied. [Travis CI](https://travis-ci.org/kurttheviking/ucb-js) provides on-demand testing for commits and pull requests.
 
