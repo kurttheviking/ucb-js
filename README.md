@@ -23,6 +23,10 @@ Install with `npm` (or `yarn`):
 npm install ucb --save
 ```
 
+### Caveat emptor
+
+This implementation often encounters extended floating point numbers. Arm selection is therefore subject to JavaScript's floating point precision limitations. For general information about floating point issues see the [floating point guide](http://floating-point-gui.de).
+
 
 ## Usage
 
@@ -173,8 +177,3 @@ npm run coverage
 ### Contribute
 
 PRs are welcome! For bugs, please include a failing test which passes when your PR is applied. [Travis CI](https://travis-ci.org/kurttheviking/ucb-js) provides on-demand testing for commits and pull requests.
-
-
-## Caveat emptor
-
-This implementation often encounter extended floating point numbers. Arm selection is therefore subject to JavaScript's floating point precision limitations. For general information about floating point issues see the [floating point guide](http://floating-point-gui.de).
