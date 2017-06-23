@@ -1,101 +1,76 @@
 /* global describe, it */
-/* eslint func-names: 0*/
-var _ = require('lodash');
-var BPromise = require('bluebird');
-var chai = require('chai');
+/* eslint-disable global-require, import/no-extraneous-dependencies */
 
-var expect = chai.expect;
+const expect = require('chai').expect;
 
-describe('Algorithm#select', function () {
-  var Algorithm = require('../../../index');  // eslint-disable-line global-require
-  var arms = _.random(2, 10);
-  var config = {
-    arms: arms
+const randomInteger = require('../../utils/randomInteger');
+const repeatFunction = require('../../utils/repeatFunction');
+
+describe('Algorithm#select', () => {
+  const Algorithm = require('../../../index');
+
+  const arms = randomInteger(2, 10);
+  const config = {
+    arms
   };
 
-  it('returns a number', function () {
-    var alg = new Algorithm(config);
+  it('returns a number', () => {
+    const alg = new Algorithm(config);
 
-    alg.select().then(function (arm) {
+    return alg.select().then((arm) => {
       expect(arm).to.be.a('number');
     });
   });
 
-  it('returns a valid arm', function () {
-    var alg = new Algorithm(config);
-    var iterations = _.random(10, 20);
-    var trials = Array.apply(null, Array(iterations)).map(Number.prototype.valueOf, -1);
+  it('returns a valid arm', () => {
+    const alg = new Algorithm(config);
 
-    trials = trials.map(function () {
-      return alg.select();
-    });
+    const trials = new Array(randomInteger(10, 20)).fill(-1);
 
-    return BPromise.all(trials).then(function (selections) {
+    return Promise.all(trials.map(() => alg.select())).then((selections) => {
       expect(selections.length).to.equal(trials.length);
 
-      selections.forEach(function (choice) {
+      selections.forEach((choice) => {
         expect(choice).to.be.a('number');
         expect(choice).to.be.below(arms);
       });
     });
   });
 
-  it('initially explores all available arms', function () {
-    var alg = new Algorithm(config);
-    var tasks = [];
+  it('initially explores all available arms', () => {
+    const alg = new Algorithm(config);
+    const tasks = [];
 
-    _.times(
-      arms,
-      function () {
-        tasks.push(function () {
-          return alg.select().then(function (arm) {
-            return alg.reward(arm, _.random(0, 1));
-          });
-        });
+    repeatFunction(arms)(
+      () => {
+        tasks.push(() => alg.select().then(arm => alg.reward(arm, randomInteger(0, 100) / 100)));
       }
     );
 
-    BPromise.reduce(
-      tasks,
-      function (out, task) {
-        return task().then(function () { return out + 1; });
-      },
-      0
-    ).then(function (ct) {
-      expect(ct).to.equal(tasks.length);
-
-      alg.counts.forEach(function (val) {
-        expect(val).to.equal(1);
+    return tasks.reduce((accum, task) => accum.then(task), Promise.resolve())
+    .then(() => {
+      alg.counts.forEach((ct) => {
+        expect(ct).to.equal(1);
       });
     });
   });
 
-  it('begins to exploit best arm', function () {
-    var alg = new Algorithm(config);
-    var tasks = [];
+  it('begins to exploit best arm', () => {
+    const alg = new Algorithm(config);
+    const tasks = [];
 
-    _.times(
-      arms * 4,
-      function () {
-        tasks.push(function () {
-          return alg.select().then(function (arm) {
-            return alg.reward(arm, arm === 0 ? 1 : 0);
-          });
-        });
+    repeatFunction(arms * 10)(
+      () => {
+        tasks.push(() => alg.select().then(arm => alg.reward(arm, arm === 0 ? 1 : 0)));
       }
     );
 
-    BPromise.reduce(
-      tasks,
-      function (out, task) {
-        return task().then(function () { return out + 1; });
-      },
-      0
-    ).then(function (ct) {
-      expect(ct).to.equal(tasks.length);
+    return tasks.reduce((accum, task) => accum.then(task), Promise.resolve())
+    .then(() => {
+      const bestCt = alg.counts[0];
 
-      alg.counts.slice(1).forEach(function (plays) {
-        expect(plays).to.be.below(alg.counts[0]);
+      alg.counts.slice(1).forEach((ct) => {
+        expect(ct).to.be.below(bestCt);
       });
     });
   });

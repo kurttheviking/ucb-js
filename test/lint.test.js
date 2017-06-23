@@ -1,7 +1,12 @@
-var lint = require('mocha-eslint');
+/* eslint-disable global-require, import/no-extraneous-dependencies, strict */
 
-var options = {};
-var paths = [
+'use strict';
+
+require('eslint');
+const lint = require('mocha-eslint');
+
+const options = {};
+const paths = [
   'lib',
   'index.js'
 ];
