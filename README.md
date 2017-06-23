@@ -43,7 +43,7 @@ This implementation often encounters extended floating point numbers. Arm select
 2. Select an arm (exploits or explores, determined by the algorithm):
 
     ```js
-    algorithm.select().then(function (arm) {
+    algorithm.select().then((arm) => {
       // do something based on the chosen arm
     });
     ```
