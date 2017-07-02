@@ -63,7 +63,7 @@ Creates a new optimization algorithm.
 
 #### Arguments
 
-- `config` (Object): algorithm instance parameters
+- `config` (`Object`): algorithm instance parameters
 
 The `config` object supports two parameters:
 
