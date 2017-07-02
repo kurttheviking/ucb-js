@@ -1,5 +1,5 @@
 ucb
-=======
+===
 
 [![Build Status](https://travis-ci.org/kurttheviking/ucb-js.svg?branch=master)](https://travis-ci.org/kurttheviking/ucb-js)
 
