@@ -67,7 +67,7 @@ Creates a new optimization algorithm.
 
 The `config` object supports two parameters:
 
-- `arms`: (`Number`, Integer; Optional) The number of arms over which the optimization will operate; defaults to `2`
+- `arms` (`Number`, Integer; Optional): The number of arms over which the optimization will operate; defaults to `2`
 
 Alternatively, the `state` object returned from [`Algorithm#serialize`](https://github.com/kurttheviking/ucb-js#algorithmserialize) can be passed as `config`.
 
