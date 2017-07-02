@@ -55,7 +55,7 @@ describe('Algorithm#select', () => {
     });
   });
 
-  it('begins to exploit best arm', () => {
+  it('begins to exploit best arm (first)', () => {
     const alg = new Algorithm(config);
     const tasks = [];
 
@@ -70,6 +70,26 @@ describe('Algorithm#select', () => {
       const bestCt = alg.counts[0];
 
       alg.counts.slice(1).forEach((ct) => {
+        expect(ct).to.be.below(bestCt);
+      });
+    });
+  });
+
+  it('begins to exploit best arm (last)', () => {
+    const alg = new Algorithm(config);
+    const tasks = [];
+
+    repeatFunction(arms * 10)(
+      () => {
+        tasks.push(() => alg.select().then(arm => alg.reward(arm, arm === (arms - 1) ? 1 : 0)));
+      }
+    );
+
+    return tasks.reduce((accum, task) => accum.then(task), Promise.resolve())
+    .then(() => {
+      const bestCt = alg.counts[arms - 1];
+
+      alg.counts.slice(0, -1).forEach((ct) => {
         expect(ct).to.be.below(bestCt);
       });
     });
