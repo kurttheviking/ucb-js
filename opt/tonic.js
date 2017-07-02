@@ -1,6 +1,6 @@
-/* eslint no-console: 0 */
+/* eslint-disable */
 
-const Algorithm = require('ucb');  // eslint-disable-line import/no-unresolved, import/no-extraneous-dependencies, max-len
+const Algorithm = require('ucb');
 
 const algorithm = new Algorithm();
 
