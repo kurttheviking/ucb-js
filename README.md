@@ -160,6 +160,10 @@ algorithm.serialize().then(state => console.log(state));
 
 ## Development
 
+### Contribute
+
+PRs are welcome! For bugs, please include a failing test which passes when your PR is applied. [Travis CI](https://travis-ci.org/kurttheviking/ucb-js) provides on-demand testing for commits and pull requests.
+
 ### Workflow
 
 1. Feature development and bug fixing should occur on a non-master branch.
@@ -187,7 +191,3 @@ Or, to run the test suite and view test coverage:
 ```sh
 npm run coverage
 ```
-
-### Contribute
-
-PRs are welcome! For bugs, please include a failing test which passes when your PR is applied. [Travis CI](https://travis-ci.org/kurttheviking/ucb-js) provides on-demand testing for commits and pull requests.
