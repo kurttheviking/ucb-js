@@ -120,8 +120,8 @@ Inform the algorithm about the payoff from a given arm.
 
 #### Arguments
 
-- `arm` (Integer): the arm index (provided from `algorithm.select()`)
-- `reward` (Number): the observed reward value (which can be 0, to indicate no reward)
+- `arm` (`Number`, Integer): the arm index (provided from `Algorithm#select()`)
+- `reward` (`Number`): the observed reward value (which can be 0 to indicate no reward)
 
 #### Returns
 
@@ -159,6 +159,20 @@ algorithm.serialize().then(state => console.log(state));
 
 
 ## Development
+
+### Workflow
+
+1. Feature development and bug fixing should occur on a non-master branch.
+2. Changes should be submitted to master via a [Pull Request](https://github.com/kurttheviking/ucb-js/compare).
+3. Pull Requests should be merged via a merge commit. Local "in-process" commits may be squashed prior to pushing to the remote feature branch.
+
+To enable a git hook that runs `npm test` prior to pushing, `cd` into the local repo and run:
+
+```sh
+touch .git/hooks/pre-push
+chmod +x .git/hooks/pre-push
+echo "npm test" > .git/hooks/pre-push
+```
 
 ### Tests
 
