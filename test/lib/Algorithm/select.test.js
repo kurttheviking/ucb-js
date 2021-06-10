@@ -44,9 +44,12 @@ describe('Algorithm#select', () => {
     const alg = new Algorithm(config);
     alg.counts = counts;
 
-    const arm = await alg.select();
+    const trials = new Array(50).fill(-1);
+    const selections = await Promise.all(trials.map(() => alg.select()));
+    const selectedArms = new Set(selections);
 
-    expect(arm).to.equal(emptyArm);
+    expect(selectedArms.size).to.equal(1);
+    expect(selectedArms.values().next().value).to.equal(emptyArm);
   });
 
   it('randomly selects an empty arm when more than one', async () => {
