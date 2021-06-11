@@ -38,21 +38,22 @@ describe('Algorithm#select', () => {
     });
   });
 
-  it('if there is one empty arm, returns that empty arm', async () => {
+  it('if there is one empty arm, returns that empty arm', () => {
     const emptyArm = randomInteger(0, arms - 1);
     const counts = Array(arms).fill(1).map((count, idx) => (idx === emptyArm ? 0 : count));
     const alg = new Algorithm(config);
     alg.counts = counts;
 
     const trials = new Array(50).fill(-1);
-    const selections = await Promise.all(trials.map(() => alg.select()));
-    const selectedArms = new Set(selections);
+    Promise.all(trials.map(() => alg.select())).then((selections) => {
+      const selectedArms = new Set(selections);
 
-    expect(selectedArms.size).to.equal(1);
-    expect(selectedArms.values().next().value).to.equal(emptyArm);
+      expect(selectedArms.size).to.equal(1);
+      expect(selectedArms.values().next().value).to.equal(emptyArm);
+    });
   });
 
-  it('randomly selects an empty arm when more than one', async () => {
+  it('randomly selects an empty arm when more than one', () => {
     const emptyArms = new Set();
     const emptyArmCount = randomInteger(2, arms);
     while (emptyArms.size < emptyArmCount) {
@@ -63,14 +64,15 @@ describe('Algorithm#select', () => {
     alg.counts = counts;
 
     const trials = new Array(50).fill(-1);
-    const selections = await Promise.all(trials.map(() => alg.select()));
-    const selectedArms = new Set(selections);
+    Promise.all(trials.map(() => alg.select())).then((selections) => {
+      const selectedArms = new Set(selections);
 
-    selectedArms.forEach((arm) => {
-      expect(arm).to.be.a('number');
-      expect(arm).to.be.below(arms);
+      selectedArms.forEach((arm) => {
+        expect(arm).to.be.a('number');
+        expect(arm).to.be.below(arms);
+      });
+      expect(selectedArms.size).to.be.greaterThan(1);
     });
-    expect(selectedArms.size).to.be.greaterThan(1);
   });
 
   it('initially explores all available arms', () => {
