@@ -1,3 +1,5 @@
+import { Random, MersenneTwister19937 } from 'random-js';
+
 export interface IOptions {
   arms: number;
 }
@@ -67,9 +69,21 @@ export class Ucb implements ISerialized {
   }
 
   selectSync(): number {
-    const emptyArm = this.counts.indexOf(0);
+    let emptyArm = this.counts.indexOf(0);
 
     if (emptyArm !== -1) {
+      const emptyArms = this.counts.reduce((arms, count, index) => {
+        if (count === 0) {
+          arms.push(index);
+        }
+        return arms;
+      }, []);
+
+      if (emptyArms.length > 1) {
+        const randomIndex = randomInteger(0, emptyArms.length - 1);
+        emptyArm = emptyArms[randomIndex];
+      }
+
       return emptyArm;
     }
 
@@ -78,6 +92,7 @@ export class Ucb implements ISerialized {
     const values = this.counts.map((ct, i) => this.values[i] + Math.sqrt(bonus / ct));
 
     const max = Math.max.apply(null, values);
+
     return values.indexOf(max);
   }
 
@@ -100,4 +115,9 @@ function sum(arr: number[]): number {
 
 function reducer(out: number, value: number): number {
   return out + value;
+}
+
+const random = new Random(MersenneTwister19937.autoSeed());
+function randomInteger(min: number, max: number): number {
+  return random.integer(min, max);
 }
