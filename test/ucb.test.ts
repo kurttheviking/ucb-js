@@ -1,5 +1,5 @@
 import { Ucb } from "../src/ucb";
-import { randomInteger } from "./utils/random-integer";
+import { randomInteger } from "../src/utils/random-integer";
 import { cloneSimpleObject } from "./utils/clone-simple-object";
 
 describe('Ucb', () => {
