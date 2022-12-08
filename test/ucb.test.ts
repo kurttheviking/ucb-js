@@ -1,6 +1,6 @@
-import { Ucb } from "../src/ucb";
-import { randomInteger } from "../src/utils/random-integer";
-import { cloneSimpleObject } from "./utils/clone-simple-object";
+import { Ucb } from '../src/ucb';
+import { randomInteger } from '../src/utils/random-integer';
+import { cloneSimpleObject } from './utils/clone-simple-object';
 
 describe('Ucb', () => {
   describe('constructor', () => {

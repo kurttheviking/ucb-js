@@ -36,7 +36,7 @@
   },
   "homepage": "https://github.com/kurttheviking/ucb-js#readme",
   "dependencies": {
-    "@types/random-js": "^2.0.0"
+    "random-js": "^2.1.0"
   },
   "devDependencies": {
     "@types/jest": "^29.2.4",
@@ -52,7 +52,6 @@
     "jest-ts-auto-mock": "^2.1.0",
     "mocha-eslint": "5.0.0",
     "mockery": "2.1.0",
-    "random-js": "^2.1.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "sinon": "7.2.2",
