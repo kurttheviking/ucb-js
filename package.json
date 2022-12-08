@@ -36,12 +36,11 @@
   },
   "homepage": "https://github.com/kurttheviking/ucb-js#readme",
   "dependencies": {
-    "random-js": "1.0.8"
+    "@types/random-js": "^2.0.0"
   },
   "devDependencies": {
-    "@types/node": "^18.11.11",
-    "rimraf": "^3.0.2",
     "@types/jest": "^29.2.4",
+    "@types/node": "^18.11.11",
     "@typescript-eslint/eslint-plugin": "^5.45.1",
     "@typescript-eslint/parser": "^5.45.1",
     "chai": "4.2.0",
@@ -56,6 +55,7 @@
     "sinon": "7.2.2"
     "random-js": "^2.1.0",
     "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
     "ts-auto-mock": "^3.6.2",
     "ts-jest": "^29.0.3",
     "ts-node": "^8.10.2",
