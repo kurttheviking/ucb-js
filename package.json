@@ -7,7 +7,7 @@
     "out/",
     "opt/"
   ],
-  "typings": "./out/ucb.d.ts",
+  "types": "out/ucb.d.ts",
   "main": "out/ucb.js",
   "keywords": [
     "multi-armed bandit",
