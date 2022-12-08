@@ -1,0 +1,42 @@
+{
+  "types": ["jest"],
+  "compilerOptions":{
+    "target":"es6",
+    "moduleResolution":"node",
+    "module":"commonjs",
+    "declaration":false,
+    "noLib":false,
+    "emitDecoratorMetadata":true,
+    "experimentalDecorators":true,
+    "sourceMap":true,
+    "pretty":true,
+    "allowUnreachableCode":true,
+    "allowUnusedLabels":true,
+    "noImplicitAny":true,
+    "noImplicitReturns":false,
+    "noImplicitUseStrict":false,
+    "outDir":"out/",
+    "baseUrl":"src/",
+    "listFiles":false,
+    "noEmitHelpers":false,
+    "plugins": [
+      {
+        "transform": "ts-auto-mock/transformer",
+        "cacheBetweenTests": false
+      }
+    ],
+    "lib": [
+      "ES2020"
+    ]
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "src/**/*.test.ts",
+    "node_modules",
+    "test",
+    "out"
+  ],
+  "compileOnSave": false
+}
