@@ -1,12 +1,12 @@
 /* eslint-disable */
 
-const Algorithm = require('ucb');
+const { Ucb } = require('ucb');
 
-const algorithm = new Algorithm();
+const ucb = new Ucb();
 
-algorithm.select().then((arm) => {
+ucb.select().then((arm) => {
   console.log('chose arm', arm);
-  return algorithm.reward(arm, 1);
+  return ucb.reward(arm, 1);
 })
-.then(() => algorithm.serialize())
+.then(() => ucb.serialize())
 .then(state => console.log('new state', JSON.stringify(state, null, 2)));
