@@ -5,7 +5,7 @@ ucb
 
 **An upper confidence bounds algorithm for multi-armed bandit problems**
 
-This implementation is based on [<em>Bandit Algorithms for Website Optimization</em>](http://shop.oreilly.com/product/0636920027393.do) and related empirical research in ["Algorithms for the multi-armed bandit problem"](http://www.cs.mcgill.ca/~vkules/bandits.pdf). In addition, this module conforms to the [BanditLab/2.0 specification](https://github.com/kurttheviking/banditlab-spec/releases).
+This implementation is based on [<em>Bandit Algorithms for Website Optimization</em>](http://shop.oreilly.com/product/0636920027393.do) and related empirical research in ["Algorithms for the multi-armed bandit problem"](http://www.cs.mcgill.ca/~vkules/bandits.pdf). In addition, this module conforms to the [BanditLab/2.0 specification](https://github.com/kurttheviking/banditlab-spec/releases).  Now written in Typescript!
 
 
 ## Get started
@@ -33,69 +33,71 @@ This implementation often encounters extended floating point numbers. Arm select
 1. Create an optimizer with `3` arms:
 
     ```js
-    const Algorithm = require('ucb');
+    const { Ucb } = require('ucb');
 
-    const algorithm = new Algorithm({
+    const ucb = new Ucb({
       arms: 3
     });
     ```
 
-2. Select an arm (exploits or explores, determined by the algorithm):
+2. Select an arm (exploits or explores, determined by ucb):
 
     ```js
-    algorithm.select().then((arm) => {
+    ucb.select().then((arm) => {
       // do something based on the chosen arm
     });
+    // or
+    const arm = ucb.selectSync();
     ```
 
 3. Report the reward earned from a chosen arm:
 
     ```js
-    algorithm.reward(arm, value);
+    ucb.reward(arm, value);
     ```
 
 
 ## API
 
-### `Algorithm(config)`
+### `Ucb(config)`
 
-Creates a new optimization algorithm.
+Creates a new Ucb.
 
 #### Arguments
 
-- `config` (`Object`): algorithm instance parameters
+- `config` (`Object`): ucb instance parameters
 
 The `config` object supports two optional parameters:
 
 - `arms` (`Number`, Integer): The number of arms over which the optimization will operate; defaults to `2`
 
-Alternatively, the `state` object resolved from [`Algorithm#serialize`](https://github.com/kurttheviking/ucb-js#algorithmserialize) can be passed as `config`.
+Alternatively, the `state` object resolved from [`Ucb#serialize`](https://github.com/kurttheviking/ucb-js#algorithmserialize) can be passed as `config`.
 
 #### Returns
 
-An instance of the ucb optimization algorithm.
+An instance of Ucb.
 
 #### Example
 
 ```js
-const Algorithm = require('ucb');
-const algorithm = new Algorithm();
+const { Ucb } = require('ucb');
+const ucb = new Ucb();
 
-assert.equal(algorithm.arms, 2);
+assert.equal(ucb.arms, 2);
 ```
 
 Or, with a passed `config`:
 
 ```js
-const Algorithm = require('ucb');
-const algorithm = new Algorithm({ arms: 4 });
+const { Ucb } = require('ucb');
+const ucb = new Ucb({ arms: 4 });
 
-assert.equal(algorithm.arms, 4);
+assert.equal(ucb.arms, 4);
 ```
 
-### `Algorithm#select()`
+### `Ucb#select()`
 
-Choose an arm to play, according to the optimization algorithm.
+Choose an arm to play, according to Ucb.
 
 #### Arguments
 
@@ -108,37 +110,42 @@ A `Promise` that resolves to a `Number` corresponding to the associated arm inde
 #### Example
 
 ```js
-const Algorithm = require('ucb');
-const algorithm = new Algorithm();
+const { Ucb } = require('ucb');
+const ucb = new Ucb();
 
-algorithm.select().then(arm => console.log(arm));
+ucb.select().then(arm => console.log(arm));
+// or
+const arm = ucb.selectSync();
 ```
 
-### `Algorithm#reward(arm, reward)`
+### `Ucb#reward(arm, reward)`
 
-Inform the algorithm about the payoff from a given arm.
+Inform Ucb about the payoff from a given arm.
 
 #### Arguments
 
-- `arm` (`Number`, Integer): the arm index (provided from `Algorithm#select()`)
+- `arm` (`Number`, Integer): the arm index (provided from `Ucb#select()`)
 - `reward` (`Number`): the observed reward value (which can be 0 to indicate no reward)
 
 #### Returns
 
-A `Promise` that resolves to an updated instance of the algorithm. (The original instance is mutated as well.)
+A `Promise` that resolves to an updated instance of ucb. (The original instance is mutated as well.)
 
 #### Example
 
 ```js
-const Algorithm = require('ucb');
-const algorithm = new Algorithm();
+const { Ucb } = require('ucb');
+const ucb = new Ucb();
 
-algorithm.reward(0, 1).then(updatedAlgorithm => console.log(updatedAlgorithm));
+ucb.reward(0, 1).then(updatedUcb => console.log(updatedUcb));
+// or
+const updatedUcb = ucb.rewardSync(0, 1);
+console.log(updatedUcb);
 ```
 
-### `Algorithm#serialize()`
+### `Ucb#serialize()`
 
-Obtain a plain object representing the internal state of the algorithm.
+Obtain a plain object representing the internal state of ucb.
 
 #### Arguments
 
@@ -146,15 +153,18 @@ _None_
 
 #### Returns
 
-A `Promise` that resolves to a stringify-able `Object` with parameters needed to reconstruct algorithm state.
+A `Promise` that resolves to a stringify-able `Object` with parameters needed to reconstruct ucb state.
 
 #### Example
 
 ```js
-const Algorithm = require('ucb');
-const algorithm = new Algorithm();
+const { Ucb } = require('ucb');
+const ucb = new Ucb();
 
-algorithm.serialize().then(state => console.log(state));
+ucb.serialize().then(state => console.log(state));
+// or
+const state = ucb.serializeSync();
+console.log(state);
 ```
 
 
@@ -169,14 +179,6 @@ PRs are welcome! For bugs, please include a failing test which passes when your 
 1. Feature development and bug fixing should occur on a non-master branch.
 2. Changes should be submitted to master via a [Pull Request](https://github.com/kurttheviking/ucb-js/compare).
 3. Pull Requests should be merged via a merge commit. Local "in-process" commits may be squashed prior to pushing to the remote feature branch.
-
-To enable a git hook that runs `npm test` prior to pushing, `cd` into the local repo and run:
-
-```sh
-touch .git/hooks/pre-push
-chmod +x .git/hooks/pre-push
-echo "npm test" > .git/hooks/pre-push
-```
 
 ### Tests
 
