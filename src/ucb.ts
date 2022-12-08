@@ -1,4 +1,4 @@
-import { Random, MersenneTwister19937 } from 'random-js';
+import { randomInteger } from './utils/random-integer';
 
 export interface IOptions {
   arms: number;
@@ -115,9 +115,4 @@ function sum(arr: number[]): number {
 
 function reducer(out: number, value: number): number {
   return out + value;
-}
-
-const random = new Random(MersenneTwister19937.autoSeed());
-function randomInteger(min: number, max: number): number {
-  return random.integer(min, max);
 }
