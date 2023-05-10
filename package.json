@@ -43,7 +43,7 @@
     "eslint-plugin-import": "2.14.0",
     "mocha-eslint": "5.0.0",
     "istanbul": "0.4.5",
-    "mocha": "5.2.0",
+    "mocha": "10.2.0",
     "mockery": "2.1.0",
     "sinon": "7.2.2"
   },
