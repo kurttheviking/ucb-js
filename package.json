@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/kurttheviking/ucb-js#readme",
   "dependencies": {
-    "debug": "4.1.1",
+    "debug": "4.3.1",
     "has": "1.0.3",
     "random-js": "1.0.8"
   },
